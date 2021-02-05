@@ -1,0 +1,15 @@
+Class ReqContattoDto {
+	int id;
+	String nome;
+	String cognome;
+	String telefono;
+}
+
+Class ResRubricaDto {
+	List<ReqContattoDto> rubrica;
+}
+
+/svuotarubrica
+/inseriscicontatto
+/recuperatuttiicontatti
+/cancellacontatto
