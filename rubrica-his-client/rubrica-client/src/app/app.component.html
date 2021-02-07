@@ -6,9 +6,9 @@
 
 <br>
 
-<input type="text" placeholder="Nome">
-<input type="text" placeholder="Cognome">
-<input type="text" placeholder="Telefono">
+<input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
+<input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
+<input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
 
 
 <table *ngIf="rubrica.length>0">
