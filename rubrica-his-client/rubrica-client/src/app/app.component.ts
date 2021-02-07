@@ -22,6 +22,7 @@ export class AppComponent {
   constructor(private http:HttpClient){}
 
   inserisciContatto(){
+    this.contatto = new ReqContattoDto();
     let oss: Observable<string>
     oss = this.http.post<string>("http://localhost:8080/inseriscicontatto",this.contatto)
     oss.subscribe(risp =>this.rispostaInserisciContatti = risp)
