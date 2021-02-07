@@ -15,8 +15,8 @@ export class AppComponent {
   contatto: ReqContattoDto = new ReqContattoDto();
   rispostaInserisciContatti = "";
   rispostaRecuperaContatti = "";
- 
   rubrica: ResRubricaDto[] = [];
+
 
   stato = "START";
 
@@ -27,10 +27,13 @@ export class AppComponent {
 
   }
   confermaAggiunta() {
-    this.contatto = new ReqContattoDto();
+    this.stato = "START";
     let oss: Observable<string>
     oss = this.http.post<string>("http://localhost:8080/inseriscicontatto", this.contatto)
-    oss.subscribe(risp => this.rispostaInserisciContatti = risp)
+    oss.subscribe(risp => {
+      this.rispostaInserisciContatti = risp,
+        this.contatto = new ReqContattoDto();
+    })
   }
 
   annullaAggiunta() {
@@ -38,12 +41,15 @@ export class AppComponent {
   }
 
   recuperaContatti() {
+    this.stato = "VIS";
     let oss: Observable<ResRubricaDto[]>
     oss = this.http.get<ResRubricaDto[]>("http://localhost:8080/recuperatuttiicontatti")
     oss.subscribe(risp => this.rubrica = risp)
   }
 
+
   confermaCancellaContatto(i: number) {
+    this.stato = "VIS"
     let oss: Observable<ResRubricaDto[]>
     oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/cancellacontatto", i)
     oss.subscribe(risp => this.rubrica = risp)
@@ -54,7 +60,7 @@ export class AppComponent {
   }
 
   annullaCancella() {
-    this.stato = "START";
+    this.stato = "VIS";
   }
 
   svuotaRubrica() {
@@ -62,4 +68,6 @@ export class AppComponent {
     oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
     oss.subscribe(risp => this.rubrica = risp)
   }
+
+
 }

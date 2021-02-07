@@ -2,3 +2,14 @@
     padding: 5px;
     margin: 5px
 }
+
+button:hover {
+    cursor: pointer;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}

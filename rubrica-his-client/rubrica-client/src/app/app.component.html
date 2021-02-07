@@ -1,10 +1,7 @@
 <div>
     <button (click)="inserisciContatto()">Inserisci contatto</button>
-
     <button (click)="recuperaContatti()">Recupera Contatti</button>
-
-    <button (click)="svuotaRubrica()">svuota rubrica</button>
-
+    <button (click)="svuotaRubrica()" *ngIf="rubrica.length > 0">svuotarubrica</button>
 </div>
 
 <div *ngIf="stato == 'AGG'">
@@ -17,7 +14,7 @@
 
 
 
-<table *ngIf="rubrica.length>0">
+<table *ngIf="rubrica.length > 0 && stato == 'VIS' || stato == 'CANC'">
     <tr>
         <th>Id</th>
         <th>Nome</th>
