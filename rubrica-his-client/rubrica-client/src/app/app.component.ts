@@ -13,36 +13,53 @@ import { ResRubricaDto } from './res-rubrica-dto';
 export class AppComponent {
   title = 'rubrica-client';
   contatto: ReqContattoDto = new ReqContattoDto();
-  rispostaInserisciContatti= "";
-  rispostaRecuperaContatti= "";
-  rispostaCancellaContatto= "";
-  rispostaSvuotaRubrica= "";
-  rubrica:ResRubricaDto[]=[];
+  rispostaInserisciContatti = "";
+  rispostaRecuperaContatti = "";
+ 
+  rubrica: ResRubricaDto[] = [];
 
-  constructor(private http:HttpClient){}
+  stato = "START";
 
-  inserisciContatto(){
+  constructor(private http: HttpClient) { }
+
+  inserisciContatto() {
+    this.stato = "AGG";
+
+  }
+  confermaAggiunta() {
     this.contatto = new ReqContattoDto();
     let oss: Observable<string>
-    oss = this.http.post<string>("http://localhost:8080/inseriscicontatto",this.contatto)
-    oss.subscribe(risp =>this.rispostaInserisciContatti = risp)
+    oss = this.http.post<string>("http://localhost:8080/inseriscicontatto", this.contatto)
+    oss.subscribe(risp => this.rispostaInserisciContatti = risp)
   }
 
-  recuperaContatti(){
+  annullaAggiunta() {
+    this.stato = "START";
+  }
+
+  recuperaContatti() {
     let oss: Observable<ResRubricaDto[]>
     oss = this.http.get<ResRubricaDto[]>("http://localhost:8080/recuperatuttiicontatti")
-    oss.subscribe(risp =>this.rubrica = risp)
+    oss.subscribe(risp => this.rubrica = risp)
   }
 
-  cancellaContatto(i:number){
-    let oss: Observable<string>
-    oss = this.http.post<string>("http://localhost:8080/cancellacontatto",i)
-    oss.subscribe(risp =>this.rispostaCancellaContatto = risp)
+  confermaCancellaContatto(i: number) {
+    let oss: Observable<ResRubricaDto[]>
+    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/cancellacontatto", i)
+    oss.subscribe(risp => this.rubrica = risp)
   }
 
-  svuotaRubrica(){
-    let oss: Observable<string>
-    oss = this.http.post<string>("http://localhost:8080/svuotarubrica",this.rubrica)
-    oss.subscribe(risp =>this.rispostaSvuotaRubrica = risp)
+  cancellaContatto() {
+    this.stato = "CANC";
+  }
+
+  annullaCancella() {
+    this.stato = "START";
+  }
+
+  svuotaRubrica() {
+    let oss: Observable<ResRubricaDto[]>
+    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
+    oss.subscribe(risp => this.rubrica = risp)
   }
 }

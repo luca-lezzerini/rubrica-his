@@ -1,14 +1,20 @@
-<button (click)="inserisciContatto()">Inserisci contatto</button>
-<br>
-<button (click)="recuperaContatti()">Recupera Contatti</button>
-<br>
-<button (click)="svuotaRubrica()">svuota rubrica</button>
+<div>
+    <button (click)="inserisciContatto()">Inserisci contatto</button>
 
-<br>
+    <button (click)="recuperaContatti()">Recupera Contatti</button>
 
-<input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
-<input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
-<input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
+    <button (click)="svuotaRubrica()">svuota rubrica</button>
+
+</div>
+
+<div *ngIf="stato == 'AGG'">
+    <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
+    <input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
+    <input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
+    <button (click)="confermaAggiunta()">Conferma</button>
+    <button (click)="annullaAggiunta()">Annulla</button>
+</div>
+
 
 
 <table *ngIf="rubrica.length>0">
@@ -19,14 +25,18 @@
         <th>Telefono</th>
         <th>Cancella</th>
     </tr>
-    <tr *ngFor="let contatto of rubrica; index as i">
+
+    <tr *ngFor="let contatto of rubrica;index as i">
         <td>{{contatto.id}}</td>
         <td>{{contatto.nome}}</td>
         <td>{{contatto.cognome}}</td>
         <td>{{contatto.telefono}}</td>
         <td>
-            <button (click)="cancellaContatto(i)">X</button>
-
+            <button (click)="cancellaContatto()" *ngIf="stato!='CANC'">X</button>
+            <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC'">Si</button>
+            <button (click)="annullaCancella()" *ngIf="stato=='CANC'">No</button>
         </td>
     </tr>
+
+
 </table>
