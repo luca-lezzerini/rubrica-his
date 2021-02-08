@@ -12,4 +12,22 @@ td,
 th {
     border: 1px solid black;
     border-collapse: collapse;
+    background-color: rgb(240, 165, 44);
+}
+
+#up{
+
+    background-color: rgb(197, 112, 14);
+}
+
+
+button{
+
+    color: white;
+    background-color: rgb(34, 33, 33);
+}
+
+h1{
+    
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
