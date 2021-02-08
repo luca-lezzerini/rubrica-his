@@ -32,7 +32,7 @@ public class RubricaController {
     public List<ReqContattoDto> inserisciContatto(@RequestBody ReqContattoDto contatto) {
         contatto.setId(cont);
         this.preRubrica.add(contatto);
-        cont += 1;
+        cont ++;
         return this.preRubrica;
 
     }
