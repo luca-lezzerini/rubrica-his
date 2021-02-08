@@ -1,7 +1,7 @@
 package it.sirfin.rubricaserver.controller;
 
-import it.sirfin.rubricaserver.Dto.ReqContattoDto;
-import it.sirfin.rubricaserver.Dto.ResRubricaDto;
+import it.sirfin.rubricaserver.dto.ReqContattoDto;
+import it.sirfin.rubricaserver.dto.ResRubricaDto;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;

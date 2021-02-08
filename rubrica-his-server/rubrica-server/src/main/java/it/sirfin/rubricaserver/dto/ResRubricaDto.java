@@ -1,4 +1,4 @@
-package it.sirfin.rubricaserver.Dto;
+package it.sirfin.rubricaserver.dto;
 
 import java.util.List;
 
