@@ -44,13 +44,13 @@ public class RubricaController {
 
     @RequestMapping("/cancellacontatto")
     public List<ReqContattoDto> cancellaContatto(@RequestBody ReqContattoDto dto) {
-        this.preRubrica.forEach(pr -> {
-            if (pr.getId() == dto.getId()) {
-                System.out.println("Elemento trovato alla posizione: " + this.preRubrica.indexOf(pr));
-                int indice = this.preRubrica.indexOf(pr);
-                this.preRubrica.remove(pr);
-            }
-        });
+        System.out.println(dto);
+        System.out.println("elemento trovato alla posizione: " + this.preRubrica.indexOf(dto));
+        try {
+            this.preRubrica.removeIf(pr -> pr.getId() == dto.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return this.preRubrica;
 
     }

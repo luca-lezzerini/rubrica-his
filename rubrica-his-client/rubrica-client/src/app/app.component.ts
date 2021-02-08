@@ -11,11 +11,8 @@ import { ResRubricaDto } from './res-rubrica-dto';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rubrica-client';
   contatto: ReqContattoDto = new ReqContattoDto();
-  rispostaInserisciContatti = "";
-  rispostaRecuperaContatti = "";
-  rubrica: ResRubricaDto[] = [];
+  rubrica: ReqContattoDto[] = [];
 
 
   stato = "START";
@@ -28,10 +25,10 @@ export class AppComponent {
   }
   confermaAggiunta() {
     this.stato = "START";
-    let oss: Observable<string>
-    oss = this.http.post<string>("http://localhost:8080/inseriscicontatto", this.contatto)
+    let oss: Observable<ReqContattoDto[]>
+    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/inseriscicontatto", this.contatto)
     oss.subscribe(risp => {
-      this.rispostaInserisciContatti = risp,
+      this.rubrica = risp,
         this.contatto = new ReqContattoDto();
     })
   }
@@ -42,16 +39,16 @@ export class AppComponent {
 
   recuperaContatti() {
     this.stato = "VIS";
-    let oss: Observable<ResRubricaDto[]>
-    oss = this.http.get<ResRubricaDto[]>("http://localhost:8080/recuperatuttiicontatti")
+    let oss: Observable<ReqContattoDto[]>
+    oss = this.http.get<ReqContattoDto[]>("http://localhost:8080/recuperatuttiicontatti")
     oss.subscribe(risp => this.rubrica = risp)
   }
 
 
   confermaCancellaContatto(i: number) {
     this.stato = "VIS"
-    let oss: Observable<ResRubricaDto[]>
-    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/cancellacontatto", this.rubrica[i])
+    let oss: Observable<ReqContattoDto[]>
+    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/cancellacontatto", this.rubrica[i])
     oss.subscribe(risp => this.rubrica = risp)
   }
 
@@ -64,8 +61,8 @@ export class AppComponent {
   }
 
   svuotaRubrica() {
-    let oss: Observable<ResRubricaDto[]>
-    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
+    let oss: Observable<ReqContattoDto[]>
+    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
     oss.subscribe(risp => this.rubrica = risp)
   }
 
