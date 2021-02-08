@@ -2,7 +2,6 @@ package it.sirfin.rubricaserver.controller;
 
 import it.sirfin.rubricaserver.Dto.ReqContattoDto;
 import it.sirfin.rubricaserver.Dto.ResRubricaDto;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +25,7 @@ public class RubricaController {
     public List<ReqContattoDto> svuotaRubrica() {
         this.preRubrica = new ArrayList();
         this.cont = 0;
-        return this.preRubrica;        
+        return this.preRubrica;
     }
 
     @RequestMapping("/inseriscicontatto")
@@ -45,9 +44,13 @@ public class RubricaController {
 
     @RequestMapping("/cancellacontatto")
     public List<ReqContattoDto> cancellaContatto(@RequestBody ReqContattoDto dto) {
-        int idCanc = dto.getId();
-        System.out.println(dto);
-        this.preRubrica.remove(idCanc);
+        this.preRubrica.forEach(pr -> {
+            if (pr.getId() == dto.getId()) {
+                System.out.println("Elemento trovato alla posizione: " + this.preRubrica.indexOf(pr));
+                int indice = this.preRubrica.indexOf(pr);
+                this.preRubrica.remove(pr);
+            }
+        });
         return this.preRubrica;
 
     }
