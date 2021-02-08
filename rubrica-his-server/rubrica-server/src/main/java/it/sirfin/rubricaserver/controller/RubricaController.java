@@ -24,7 +24,7 @@ public class RubricaController {
     @RequestMapping("/svuotarubrica")
     public List<ReqContattoDto> svuotaRubrica() {
         this.preRubrica = new ArrayList();
-        ResRubricaDto res = new ResRubricaDto(this.preRubrica);
+        this.cont = 0;
         return this.preRubrica;        
     }
 
