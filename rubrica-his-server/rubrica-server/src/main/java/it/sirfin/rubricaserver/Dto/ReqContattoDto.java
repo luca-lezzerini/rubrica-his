@@ -14,6 +14,11 @@ public class ReqContattoDto {
         this.telefono = telefono;
     }
 
+    @Override
+    public String toString() {
+        return "ReqContattoDto{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", telefono=" + telefono + '}';
+    }
+
     public ReqContattoDto() {
     }
     

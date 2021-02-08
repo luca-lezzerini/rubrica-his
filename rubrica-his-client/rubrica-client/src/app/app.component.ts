@@ -51,7 +51,7 @@ export class AppComponent {
   confermaCancellaContatto(i: number) {
     this.stato = "VIS"
     let oss: Observable<ResRubricaDto[]>
-    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/cancellacontatto", i)
+    oss = this.http.post<ResRubricaDto[]>("http://localhost:8080/cancellacontatto", this.rubrica[i])
     oss.subscribe(risp => this.rubrica = risp)
   }
 

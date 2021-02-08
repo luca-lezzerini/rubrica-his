@@ -2,6 +2,7 @@ package it.sirfin.rubricaserver.controller;
 
 import it.sirfin.rubricaserver.Dto.ReqContattoDto;
 import it.sirfin.rubricaserver.Dto.ResRubricaDto;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,6 +46,7 @@ public class RubricaController {
     @RequestMapping("/cancellacontatto")
     public List<ReqContattoDto> cancellaContatto(@RequestBody ReqContattoDto dto) {
         int idCanc = dto.getId();
+        System.out.println(dto);
         this.preRubrica.remove(idCanc);
         return this.preRubrica;
 
