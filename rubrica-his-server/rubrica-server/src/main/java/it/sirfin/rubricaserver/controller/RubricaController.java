@@ -29,9 +29,9 @@ public class RubricaController {
     }
 
     @RequestMapping("/inseriscicontatto")
-    public List<ReqContattoDto> inserisciContatto(@RequestBody ReqContattoDto dto) {
-        dto.setId(cont);
-        this.preRubrica.add(dto);
+    public List<ReqContattoDto> inserisciContatto(@RequestBody ReqContattoDto contatto) {
+        contatto.setId(cont);
+        this.preRubrica.add(contatto);
         cont += 1;
         return this.preRubrica;
 
