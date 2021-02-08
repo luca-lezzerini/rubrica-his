@@ -35,6 +35,7 @@ export class AppComponent {
 
   annullaAggiunta() {
     this.stato = "START";
+    this.contatto = new ReqContattoDto();
   }
 
   recuperaContatti() {
