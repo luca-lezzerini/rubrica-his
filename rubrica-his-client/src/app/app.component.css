@@ -34,6 +34,7 @@ table{
     width: 1000px;
     left:50%;
     transform: translateX(-50%);
+    
 }
 
 
@@ -76,6 +77,8 @@ input[type="text"]:focus{
 
 button:disabled{
     background: rgb(125 0 0);
+    transition: 0.5s;
+    cursor: not-allowed;
 }
 
 h1{
