@@ -1,44 +1,47 @@
 <div id="up">
-<h1>LA TUA RUBRICA</h1>
-<img src="assets/rubrica-icona.png">
+    <h1>LA TUA RUBRICA</h1>
+    <img src="assets/rubrica-icona.png">
 
-<div>
-    <button (click)="inserisciContatto()">Inserisci contatto</button>
-    <button (click)="recuperaContatti()">Recupera Contatti</button>
-    <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0">svuotarubrica</button>
-    <p *ngIf="clientNotFound && stato=='VIS'">Nessun contatto recuperato! inseriscine qualuno</p>
+    <div>
+        <button (click)="inserisciContatto()">Inserisci contatto</button>
+        <button (click)="recuperaContatti()">Recupera Contatti</button>
+        <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0">svuotarubrica</button>
+        <p *ngIf="clientNotFound && stato=='VIS'">Nessun contatto recuperato! inseriscine qualuno</p>
 
-</div>
+    </div>
 
-<div *ngIf="stato == 'AGG'" class="inserimento">
-    <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
-    <input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
-    <input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
-    <br>
-    <button (click)="confermaAggiunta()">Conferma</button>
-    <button (click)="annullaAggiunta()">Annulla</button>
-</div>
+    <p *ngIf="emptyField">Controlla i campi inseriti!</p>
+    
+    <div *ngIf="stato == 'AGG'" class="inserimento">
+        <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
+        <input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
+        <input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
+        <br>
+        <button (click)="confermaAggiunta()">Conferma</button>
+        <button (click)="annullaAggiunta()">Annulla</button>
+    </div>
 
-<table *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS' || stato == 'CANC'">
-    <tr>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>Cognome</th>
-        <th>Telefono</th>
-        <th>Cancella</th>
-    </tr>
+    <table *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS' || stato == 'CANC'">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Telefono</th>
+            <th>Cancella</th>
+        </tr>
 
-    <tr *ngFor="let contatto of rubricaVisualizzata;index as i">
-        <td>{{contatto.id}}</td>
-        <td>{{contatto.nome}}</td>
-        <td>{{contatto.cognome}}</td>
-        <td>{{contatto.telefono}}</td>
-        <td>
-            <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false" [disabled]="cancDisabled">X</button>
-            <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Si</button>
-            <button (click)="annullaCancella(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">No</button>
-        </td>
-    </tr>
+        <tr *ngFor="let contatto of rubricaVisualizzata;index as i">
+            <td>{{contatto.id}}</td>
+            <td>{{contatto.nome}}</td>
+            <td>{{contatto.cognome}}</td>
+            <td>{{contatto.telefono}}</td>
+            <td>
+                <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false"
+                    [disabled]="cancDisabled">X</button>
+                <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Si</button>
+                <button (click)="annullaCancella(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">No</button>
+            </td>
+        </tr>
 
-</table>
+    </table>
 </div>

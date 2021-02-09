@@ -72,7 +72,9 @@ input[type="text"]:focus{
 }
 
 
-
+button:disabled{
+    background: rgb(125 0 0);
+}
 
 h1{
     
