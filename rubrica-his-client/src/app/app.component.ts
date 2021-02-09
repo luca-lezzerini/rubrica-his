@@ -13,22 +13,23 @@ import { ResRubricaDto } from './res-rubrica-dto';
 export class AppComponent {
   contatto: ReqContattoDto = new ReqContattoDto();
   rubricaVisualizzata: ReqContattoDto[] = [];
-
-
+  pulsanteCanc:boolean[] = [];
+  clientNotFound:boolean = false;
+  
   stato = "START";
 
   constructor(private http: HttpClient) { }
 
   inserisciContatto() {
     this.stato = "AGG";
-
+    
   }
   confermaAggiunta() {
     this.stato = "START";
-    let oss: Observable<ReqContattoDto[]>
-    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/inseriscicontatto", this.contatto)
+    let oss: Observable<ResRubricaDto>
+    oss = this.http.post<ResRubricaDto>("http://localhost:8080/inseriscicontatto", this.contatto)
     oss.subscribe(risp => {
-      this.rubrica = risp,
+      this.rubricaVisualizzata = risp.rubrica,
         this.contatto = new ReqContattoDto();
     })
   }
@@ -46,29 +47,45 @@ export class AppComponent {
     this.stato = "VIS";
     let oss: Observable<ResRubricaDto>
     oss = this.http.get<ResRubricaDto>("http://localhost:8080/recuperatuttiicontatti")
-    oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
+    oss.subscribe(risp => {
+      this.rubricaVisualizzata = risp.rubrica
+      
+    })
+
+    if(this.rubricaVisualizzata.length == 0){
+      this.clientNotFound = true;
+    }else{
+      this.clientNotFound = false;
+    }
+
+    for(let i = 0;i<this.rubricaVisualizzata.length;i++){
+      this.pulsanteCanc[i] = false;
+    }
   }
 
 
   confermaCancellaContatto(i: number) {
-    this.stato = "VIS"
-    let oss: Observable<ReqContattoDto[]>
-    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/cancellacontatto", this.rubrica[i])
-    oss.subscribe(risp => this.rubricaVisualizzata = risp)
-  }
-
-  cancellaContatto() {
-    this.stato = "CANC";
-  }
-
-  annullaCancella() {
     this.stato = "VIS";
+    let oss: Observable<ResRubricaDto>
+    oss = this.http.post<ResRubricaDto>("http://localhost:8080/cancellacontatto", this.rubricaVisualizzata[i])
+    oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
+    this.pulsanteCanc[i] = false;
+  }
+
+  cancellaContatto(i:number) {
+    this.stato = "CANC";
+    this.pulsanteCanc[i] = true;
+  }
+
+  annullaCancella(i:number) {
+    this.stato = "VIS";
+    this.pulsanteCanc[i] = false;
   }
 
   svuotaRubrica() {
-    let oss: Observable<ReqContattoDto[]>
-    oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
-    oss.subscribe(risp => this.rubricaVisualizzata = risp)
+    let oss: Observable<ResRubricaDto>
+    oss = this.http.post<ResRubricaDto>("http://localhost:8080/svuotarubrica", this.rubricaVisualizzata)
+    oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
   }
 
 

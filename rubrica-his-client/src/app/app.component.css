@@ -1,10 +1,15 @@
 * {
     padding: 5px;
-    margin: 5px
+    margin: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button:hover {
     cursor: pointer;
+    
+    
 }
 
 table,
@@ -13,19 +18,61 @@ th {
     border: 1px solid black;
     border-collapse: collapse;
     background-color: rgb(240, 165, 44);
+    
+}
+
+table{
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
 }
 
 #up{
 
     background-color: rgb(197, 112, 14);
+    position: relative;
+    width: 1000px;
+    left:50%;
+    transform: translateX(-50%);
 }
 
 
 button{
-
+    
     color: white;
     background-color: rgb(34, 33, 33);
 }
+
+input[type="text"]{
+    display: block;
+    position:relative;
+    left:50%;
+    transform: translateX(-50%);
+    outline:none;
+    border:none;
+    border-bottom: 2px solid black;
+    width: 150px;
+    transition:0.25s;
+    margin-top:10px;
+    
+}
+
+input[type="text"]:focus{
+    display: block;
+    position:relative;
+    left:50%;
+    transform: translateX(-50%);
+    outline:none;
+    border:none;
+    border-bottom: 2px solid black;
+    width: 200px;
+    transition:0.25s;
+    padding: 7px;
+    margin-top:10px;
+}
+
+
+
 
 h1{
     

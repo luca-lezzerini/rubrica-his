@@ -2,24 +2,22 @@
 <h1>LA TUA RUBRICA</h1>
 <img src="assets/rubrica-icona.png">
 
-
-
-
 <div>
     <button (click)="inserisciContatto()">Inserisci contatto</button>
     <button (click)="recuperaContatti()">Recupera Contatti</button>
-    <button (click)="svuotaRubrica()" *ngIf="rubrica.length > 0">svuotarubrica</button>
+    <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0">svuotarubrica</button>
+    <p *ngIf="clientNotFound && stato=='VIS'">Nessun contatto recuperato! inseriscine qualuno</p>
+
 </div>
 
-<div *ngIf="stato == 'AGG'">
+<div *ngIf="stato == 'AGG'" class="inserimento">
     <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
     <input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
     <input type="text" placeholder="Telefono" [(ngModel)]="contatto.telefono">
+    <br>
     <button (click)="confermaAggiunta()">Conferma</button>
     <button (click)="annullaAggiunta()">Annulla</button>
 </div>
-
-
 
 <table *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS' || stato == 'CANC'">
     <tr>
@@ -36,12 +34,11 @@
         <td>{{contatto.cognome}}</td>
         <td>{{contatto.telefono}}</td>
         <td>
-            <button (click)="cancellaContatto()" *ngIf="stato!='CANC'">X</button>
-            <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC'">Si</button>
-            <button (click)="annullaCancella()" *ngIf="stato=='CANC'">No</button>
+            <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false">X</button>
+            <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Si</button>
+            <button (click)="annullaCancella(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">No</button>
         </td>
     </tr>
-
 
 </table>
 </div>
