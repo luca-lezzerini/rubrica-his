@@ -12,7 +12,7 @@ import { ResRubricaDto } from './res-rubrica-dto';
 })
 export class AppComponent {
   contatto: ReqContattoDto = new ReqContattoDto();
-  rubrica: ReqContattoDto[] = [];
+  rubricaVisualizzata: ReqContattoDto[] = [];
 
 
   stato = "START";
@@ -38,11 +38,15 @@ export class AppComponent {
     this.contatto = new ReqContattoDto();
   }
 
+  //aggiornare l'argomento degli osservabili come in questo da "<ReqContattoDto[]>"
+  //a "<ResRubricaDto>" 
+  //aggiornare risposte rest inserendo nella rubrica visualizzata la proprietà
+  //"rubrica" della classe ResRubricaDto.
   recuperaContatti() {
     this.stato = "VIS";
-    let oss: Observable<ReqContattoDto[]>
-    oss = this.http.get<ReqContattoDto[]>("http://localhost:8080/recuperatuttiicontatti")
-    oss.subscribe(risp => this.rubrica = risp)
+    let oss: Observable<ResRubricaDto>
+    oss = this.http.get<ResRubricaDto>("http://localhost:8080/recuperatuttiicontatti")
+    oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
   }
 
 
@@ -50,7 +54,7 @@ export class AppComponent {
     this.stato = "VIS"
     let oss: Observable<ReqContattoDto[]>
     oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/cancellacontatto", this.rubrica[i])
-    oss.subscribe(risp => this.rubrica = risp)
+    oss.subscribe(risp => this.rubricaVisualizzata = risp)
   }
 
   cancellaContatto() {
@@ -64,7 +68,7 @@ export class AppComponent {
   svuotaRubrica() {
     let oss: Observable<ReqContattoDto[]>
     oss = this.http.post<ReqContattoDto[]>("http://localhost:8080/svuotarubrica", this.rubrica)
-    oss.subscribe(risp => this.rubrica = risp)
+    oss.subscribe(risp => this.rubricaVisualizzata = risp)
   }
 
 

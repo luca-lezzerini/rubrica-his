@@ -21,7 +21,7 @@
 
 
 
-<table *ngIf="rubrica.length > 0 && stato == 'VIS' || stato == 'CANC'">
+<table *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS' || stato == 'CANC'">
     <tr>
         <th>Id</th>
         <th>Nome</th>
@@ -30,7 +30,7 @@
         <th>Cancella</th>
     </tr>
 
-    <tr *ngFor="let contatto of rubrica;index as i">
+    <tr *ngFor="let contatto of rubricaVisualizzata;index as i">
         <td>{{contatto.id}}</td>
         <td>{{contatto.nome}}</td>
         <td>{{contatto.cognome}}</td>
