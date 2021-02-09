@@ -10,7 +10,10 @@
 
     </div>
 
-    <p *ngIf="emptyField" class="campivuoti">Controlla i campi inseriti!</p>
+    <p *ngIf="emptyFields" class="campivuoti">Hai lasciato tutti i campi vuoti!</p>
+    <p *ngIf="emptyNome" class="campivuoti">Non hai inserito il nome</p>
+    <p *ngIf="emptyCognome" class="campivuoti">Non hai inserito il cognome</p>
+    <p *ngIf="emptyTelefono" class="campivuoti">Non hai inserito il telefono</p>
 
     <div *ngIf="stato == 'AGG'" class="inserimento">
         <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">

@@ -16,7 +16,11 @@ export class AppComponent {
   pulsanteCanc: boolean[] = [];
   cancDisabled: boolean = false;
   clientNotFound: boolean = false;
-  emptyField:boolean = false;
+
+  emptyFields: boolean = false;
+  emptyNome: boolean = false;
+  emptyCognome: boolean = false;
+  emptyTelefono: boolean = false;
 
   stato = "START";
 
@@ -27,25 +31,66 @@ export class AppComponent {
 
   }
   confermaAggiunta() {
-    if (this.contatto.nome != "" && this.contatto.cognome != "" && this.contatto.telefono != ""){
-    
-    this.emptyField = false;
-    this.stato = "START";
-    let oss: Observable<ResRubricaDto>
-    oss = this.http.post<ResRubricaDto>("http://localhost:8080/inseriscicontatto", this.contatto)
-    oss.subscribe(risp => {
-      this.rubricaVisualizzata = risp.rubrica,
-        this.contatto = new ReqContattoDto();
-    })
-  }else{
-    this.emptyField = true;
-  }
+    if (this.contatto.nome != "" && this.contatto.cognome != "" && this.contatto.telefono != "") {
+
+      this.emptyNome = false;
+      this.emptyCognome = false;
+      this.emptyTelefono = false;
+      this.emptyFields = false;
+      this.stato = "START";
+      let oss: Observable<ResRubricaDto>
+      oss = this.http.post<ResRubricaDto>("http://localhost:8080/inseriscicontatto", this.contatto)
+      oss.subscribe(risp => {
+        this.rubricaVisualizzata = risp.rubrica,
+          this.contatto = new ReqContattoDto();
+      })
+
+    } else if (this.contatto.nome == "" && this.contatto.cognome != "" && this.contatto.telefono != "") {
+      this.emptyNome = true;
+      this.emptyCognome = false;
+      this.emptyTelefono = false;
+      this.emptyFields = false;
+    } else if (this.contatto.nome == "" && this.contatto.cognome == "" && this.contatto.telefono != "") {
+      this.emptyNome = true;
+      this.emptyCognome = true;
+      this.emptyTelefono = false;
+      this.emptyFields = false;
+    } else if (this.contatto.nome == "" && this.contatto.cognome != "" && this.contatto.telefono == "") {
+      this.emptyNome = true;
+      this.emptyTelefono = true;
+      this.emptyCognome = false;
+      this.emptyFields = false;
+    } else if (this.contatto.nome != "" && this.contatto.cognome == "" && this.contatto.telefono != "") {
+      this.emptyCognome = true;
+      this.emptyNome = false;
+      this.emptyTelefono = false;
+      this.emptyFields = false;
+    } else if (this.contatto.nome != "" && this.contatto.cognome == "" && this.contatto.telefono == "") {
+      this.emptyCognome = true;
+      this.emptyTelefono = true;
+      this.emptyNome = false;
+      this.emptyFields = false;
+    } else if (this.contatto.nome != "" && this.contatto.cognome != "" && this.contatto.telefono == "") {
+      this.emptyTelefono = true;
+      this.emptyNome = false;
+      this.emptyFields = false;
+      this.emptyCognome = false;
+    } else {
+      this.emptyFields = true;
+      this.emptyTelefono = false;
+      this.emptyNome = false;
+      this.emptyCognome = false;
+    }
+
   }
 
   annullaAggiunta() {
     this.stato = "START";
     this.contatto = new ReqContattoDto();
-    this.emptyField = false;
+    this.emptyNome = false;
+    this.emptyCognome = false;
+    this.emptyTelefono = false;
+    this.emptyFields = false;
   }
 
   //aggiornare l'argomento degli osservabili come in questo da "<ReqContattoDto[]>"
@@ -74,13 +119,13 @@ export class AppComponent {
 
 
   confermaCancellaContatto(i: number) {
-      this.stato = "VIS";
-      let oss: Observable<ResRubricaDto>
-      oss = this.http.post<ResRubricaDto>("http://localhost:8080/cancellacontatto", this.rubricaVisualizzata[i])
-      oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
-      this.pulsanteCanc[i] = false;
-      this.cancDisabled = false;
-    
+    this.stato = "VIS";
+    let oss: Observable<ResRubricaDto>
+    oss = this.http.post<ResRubricaDto>("http://localhost:8080/cancellacontatto", this.rubricaVisualizzata[i])
+    oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
+    this.pulsanteCanc[i] = false;
+    this.cancDisabled = false;
+
   }
 
   cancellaContatto(i: number) {
