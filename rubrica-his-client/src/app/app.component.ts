@@ -14,6 +14,7 @@ export class AppComponent {
   contatto: ReqContattoDto = new ReqContattoDto();
   rubricaVisualizzata: ReqContattoDto[] = [];
   pulsanteCanc:boolean[] = [];
+  cancDisabled:boolean = false;
   clientNotFound:boolean = false;
   
   stato = "START";
@@ -25,6 +26,7 @@ export class AppComponent {
     
   }
   confermaAggiunta() {
+    
     this.stato = "START";
     let oss: Observable<ResRubricaDto>
     oss = this.http.post<ResRubricaDto>("http://localhost:8080/inseriscicontatto", this.contatto)
@@ -32,6 +34,7 @@ export class AppComponent {
       this.rubricaVisualizzata = risp.rubrica,
         this.contatto = new ReqContattoDto();
     })
+
   }
 
   annullaAggiunta() {
@@ -70,16 +73,19 @@ export class AppComponent {
     oss = this.http.post<ResRubricaDto>("http://localhost:8080/cancellacontatto", this.rubricaVisualizzata[i])
     oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)
     this.pulsanteCanc[i] = false;
+    this.cancDisabled = false;
   }
 
   cancellaContatto(i:number) {
     this.stato = "CANC";
     this.pulsanteCanc[i] = true;
+    this.cancDisabled = true;
   }
 
   annullaCancella(i:number) {
     this.stato = "VIS";
     this.pulsanteCanc[i] = false;
+    this.cancDisabled = false;
   }
 
   svuotaRubrica() {
