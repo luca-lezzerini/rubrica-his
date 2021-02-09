@@ -72,6 +72,8 @@ input[type="text"]:focus{
 }
 
 
+
+
 button:disabled{
     background: rgb(125 0 0);
 }
@@ -79,4 +81,18 @@ button:disabled{
 h1{
     
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.campivuoti{
+    animation: animazione1 4s infinite;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+@keyframes animazione1{
+    0%{color:rgb(180, 0, 0)}
+    25%{color:black}
+    50%{color:rgb(180, 0, 0)}
+    75%{color:black}
+    100%{color:rgb(180, 0, 0)}
 }
