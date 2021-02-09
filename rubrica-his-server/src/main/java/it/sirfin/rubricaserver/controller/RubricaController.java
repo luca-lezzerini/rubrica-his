@@ -52,15 +52,5 @@ public class RubricaController {
             e.printStackTrace();
         }
         return this.preRubrica;
-
     }
-
-    @RequestMapping("/addDefault")
-    public ResRubricaDto addDefault() {
-        this.preRubrica.add(new ReqContattoDto(100, "xxx", "xxx", "654321"));
-        this.preRubrica.add(new ReqContattoDto(100, "xxx", "xxx", "654321"));
-        this.preRubrica.add(new ReqContattoDto(100, "xxx", "xxx", "654321"));
-        return new ResRubricaDto(this.preRubrica);
-    }
-
 }
