@@ -37,8 +37,9 @@ public class RubricaServiceImpl implements RubricaService {
         return this.rubricaService;
     }
 
-    //Nel metodo cancellaContatto utilizziamo "remove" che rimuove tutto ma
-    //affiancando un If riusciamo anche a cancellare il giusto Id
+    //cancellaContatto si avvale del metodo removeIf tramite il quale 
+    //cancelliamo tutti i contatti che hanno lo stesso id del contatto trasmesso
+    //da client.
     @Override
     public List<ReqContattoDto> cancellaContatto(ReqContattoDto contatto) {
         this.rubricaService.removeIf(rs -> rs.getId() == contatto.getId());
