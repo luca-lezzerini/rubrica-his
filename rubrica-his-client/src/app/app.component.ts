@@ -23,13 +23,15 @@ export class AppComponent {
   emptyTelefono: boolean = false;
 
   stato = "START";
-
+  /* creazione del costruttore, senza di esso non possiamo far partire richieste */
   constructor(private http: HttpClient) { }
 
   inserisciContatto() {
     this.stato = "AGG";
 
   }
+
+  /* In questo metodo vediamo come far partire la richiesta,riga 43-48 */
   confermaAggiunta() {
     if (this.contatto.nome != "" && this.contatto.cognome != "" && this.contatto.telefono != "") {
 

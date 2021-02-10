@@ -1,11 +1,15 @@
+<!--In questo primo div inseriamo il titolo ed un immagine -->
 <div id="up">
     <h1>LA TUA RUBRICA</h1>
     <img src="assets/rubrica-icona.png">
 
+    <!-- Creazione di 3 bottoni con aggiunta di stati, e creazione di un messaggio di errore -->
     <div>
         <button (click)="inserisciContatto()" *ngIf="stato != 'CANC'">Inserisci contatto</button>
-        <button (click)="recuperaContatti()" *ngIf="stato != 'VIS' && stato != 'CANC' && stato != 'AGG'">Recupera Contatti</button>
-        <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS'">svuotarubrica</button>
+        <button (click)="recuperaContatti()" *ngIf="stato != 'VIS' && stato != 'CANC' && stato != 'AGG'">Recupera
+            Contatti</button>
+        <button (click)="svuotaRubrica()"
+            *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS'">svuotarubrica</button>
         <p *ngIf="clientNotFound && stato=='VIS'">Nessun contatto recuperato! inseriscine qualuno</p>
 
     </div>
@@ -15,6 +19,7 @@
     <p *ngIf="emptyCognome" class="campivuoti">Non hai inserito il cognome</p>
     <p *ngIf="emptyTelefono" class="campivuoti">Non hai inserito il telefono</p>
 
+    <!-- Con il cambio di stato da Start a Agg cambiamo shcermata e quindi inseriamo nuovi campi testo e bottoni -->
     <div *ngIf="stato == 'AGG'" class="inserimento">
         <input type="text" placeholder="Nome" [(ngModel)]="contatto.nome">
         <input type="text" placeholder="Cognome" [(ngModel)]="contatto.cognome">
@@ -24,6 +29,7 @@
         <button (click)="annullaAggiunta()">Annulla</button>
     </div>
 
+    <!--creazione tabella e incapsulamento dati-->
     <table *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS' || stato == 'CANC'">
         <tr>
             <th>Id</th>
@@ -41,7 +47,8 @@
             <td>
                 <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false"
                     [disabled]="cancDisabled">X</button>
-                <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Conferma</button>
+                <button (click)="confermaCancellaContatto(i)"
+                    *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Conferma</button>
                 <button (click)="annullaCancella(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Annulla</button>
             </td>
         </tr>
