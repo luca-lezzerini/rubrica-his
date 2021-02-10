@@ -93,10 +93,6 @@ export class AppComponent {
     this.emptyFields = false;
   }
 
-  //aggiornare l'argomento degli osservabili come in questo da "<ReqContattoDto[]>"
-  //a "<ResRubricaDto>" 
-  //aggiornare risposte rest inserendo nella rubrica visualizzata la proprietà
-  //"rubrica" della classe ResRubricaDto.
   recuperaContatti() {
     this.stato = "VIS";
     let oss: Observable<ResRubricaDto>
@@ -141,6 +137,7 @@ export class AppComponent {
   }
 
   svuotaRubrica() {
+    this.stato="START";
     let oss: Observable<ResRubricaDto>
     oss = this.http.post<ResRubricaDto>("http://localhost:8080/svuotarubrica", this.rubricaVisualizzata)
     oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)

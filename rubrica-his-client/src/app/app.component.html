@@ -3,9 +3,9 @@
     <img src="assets/rubrica-icona.png">
 
     <div>
-        <button (click)="inserisciContatto()">Inserisci contatto</button>
-        <button (click)="recuperaContatti()">Recupera Contatti</button>
-        <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0">svuotarubrica</button>
+        <button (click)="inserisciContatto()" *ngIf="stato != 'CANC'">Inserisci contatto</button>
+        <button (click)="recuperaContatti()" *ngIf="stato != 'VIS' && stato != 'CANC' && stato != 'AGG'">Recupera Contatti</button>
+        <button (click)="svuotaRubrica()" *ngIf="rubricaVisualizzata.length > 0 && stato == 'VIS'">svuotarubrica</button>
         <p *ngIf="clientNotFound && stato=='VIS'">Nessun contatto recuperato! inseriscine qualuno</p>
 
     </div>
