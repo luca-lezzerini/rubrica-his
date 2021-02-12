@@ -1,12 +1,12 @@
 package it.sirfin.rubricaserver.service;
 
-import it.sirfin.rubricaserver.dto.ReqContattoDto;
+import it.sirfin.rubricaserver.model.Contatto;
 import java.util.List;
 
 
 public interface RubricaService {
-    List<ReqContattoDto> svuotaRubrica();
-    List<ReqContattoDto> inserisciContatto(ReqContattoDto contatto);
-    List<ReqContattoDto> recuperaContatti();
-    List<ReqContattoDto> cancellaContatto(ReqContattoDto contatto);
+    List<Contatto> svuotaRubrica();
+    List<Contatto> inserisciContatto(Contatto contatto);
+    List<Contatto> recuperaContatti();
+    List<Contatto> cancellaContatto(Contatto contatto);
 }

@@ -1,61 +1,29 @@
 package it.sirfin.rubricaserver.dto;
 
+import it.sirfin.rubricaserver.model.Contatto;
+
 public class ReqContattoDto {
 
-    private int id;
-    private String nome;
-    private String cognome;
-    private String telefono;
+    Contatto contatto;
 
-    public ReqContattoDto(int id, String nome, String cognome, String telefono) {
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.telefono = telefono;
-    }
-
-    @Override
-    public String toString() {
-        return "ReqContattoDto{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", telefono=" + telefono + '}';
+    public ReqContattoDto(Contatto contatto) {
+        this.contatto = contatto;
     }
 
     public ReqContattoDto() {
     }
-    
 
-    public int getId() {
-        return id;
+    public Contatto getContatto() {
+        return contatto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContatto(Contatto contatto) {
+        this.contatto = contatto;
     }
 
-    public String getNome() {
-        return nome;
+    @Override
+    public String toString() {
+        return "ReqContattoDto{" + "contatto=" + contatto + '}';
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-    
-    
-    
     
 }

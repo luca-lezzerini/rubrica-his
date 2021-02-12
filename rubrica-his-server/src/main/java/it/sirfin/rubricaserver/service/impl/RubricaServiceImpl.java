@@ -1,6 +1,6 @@
 package it.sirfin.rubricaserver.service.impl;
 
-import it.sirfin.rubricaserver.dto.ReqContattoDto;
+import it.sirfin.rubricaserver.model.Contatto;
 import it.sirfin.rubricaserver.service.RubricaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +11,26 @@ public class RubricaServiceImpl implements RubricaService {
 
     //inizializziamo un contatore a 0 e ci creiamo un ArrayList
     int cont = 0;
-    List<ReqContattoDto> rubricaService = new ArrayList<>();
+    List<Contatto> rubricaService = new ArrayList<>();
 
     //Nel metodo svuotaRubrica trmite ".clear" andiamo ad eliminare tutti i
     //campi dell' ArrayList
     @Override
-    public List<ReqContattoDto> svuotaRubrica() {
+    public List<Contatto> svuotaRubrica() {
         this.rubricaService.clear();
-        this.cont = 0;
         return this.rubricaService;
     }
    
     //Nel metodo inserisciContatto andiamo a settare il valore Id incrementandolo
     //ed utilizziamo ".add" per aggiungere il contatto nell' ArrayList
     @Override
-    public List<ReqContattoDto> inserisciContatto(ReqContattoDto contatto) {
-        contatto.setId(cont);
-        cont++;
+    public List<Contatto> inserisciContatto(Contatto contatto) {
         this.rubricaService.add(contatto);
         return this.rubricaService;
     }
 
     @Override
-    public List<ReqContattoDto> recuperaContatti() {
+    public List<Contatto> recuperaContatti() {
         return this.rubricaService;
     }
 
@@ -41,7 +38,7 @@ public class RubricaServiceImpl implements RubricaService {
     //cancelliamo tutti i contatti che hanno lo stesso id del contatto trasmesso
     //da client.
     @Override
-    public List<ReqContattoDto> cancellaContatto(ReqContattoDto contatto) {
+    public List<Contatto> cancellaContatto(Contatto contatto) {
         this.rubricaService.removeIf(rs -> rs.getId() == contatto.getId());
         return this.rubricaService;
     }
