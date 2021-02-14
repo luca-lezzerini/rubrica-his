@@ -28,14 +28,13 @@ public class RubricaServiceImpl implements RubricaService {
     //Nel metodo inserisciContatto andiamo a settare il valore Id incrementandolo
     //ed utilizziamo ".add" per aggiungere il contatto nell' ArrayList
     @Override
-    public List<Contatto> inserisciContatto(Contatto contatto) {
-        this.rubricaService.add(contatto);
-        return this.rubricaService;
+    public void inserisciContatto(Contatto contatto) {
+        contattoRepository.save(contatto);
     }
 
     @Override
     public List<Contatto> recuperaContatti() {
-        return this.rubricaService;
+        return contattoRepository.findAll();
     }
 
     //cancellaContatto si avvale del metodo removeIf tramite il quale 

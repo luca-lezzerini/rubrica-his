@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RubricaService {
     void svuotaRubrica();
-    List<Contatto> inserisciContatto(Contatto contatto);
+    void inserisciContatto(Contatto contatto);
     List<Contatto> recuperaContatti();
     List<Contatto> cancellaContatto(Contatto contatto);
 }
