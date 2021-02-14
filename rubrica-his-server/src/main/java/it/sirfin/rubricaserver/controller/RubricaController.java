@@ -21,13 +21,14 @@ public class RubricaController {
     @ResponseBody
     public ResRubricaDto svuotaRubrica() {
         rubricaService.svuotaRubrica();
-        return new ResRubricaDto();
+        return new ResRubricaDto(rubricaService.recuperaContatti());
     }
 
     @RequestMapping("/inseriscicontatto")
     @ResponseBody
     public ResRubricaDto inserisciContatto(@RequestBody Contatto contatto) {
-        return new ResRubricaDto(rubricaService.inserisciContatto(contatto));
+        rubricaService.inserisciContatto(contatto);
+        return new ResRubricaDto(rubricaService.recuperaContatti());
     }
 
     @RequestMapping("/recuperatuttiicontatti")
@@ -39,6 +40,7 @@ public class RubricaController {
     @RequestMapping("/cancellacontatto")
     @ResponseBody
     public ResRubricaDto cancellaContatto(@RequestBody Contatto contatto) {
-        return new ResRubricaDto(rubricaService.cancellaContatto(contatto));
+        rubricaService.cancellaContatto(contatto);
+        return new ResRubricaDto(rubricaService.recuperaContatti());
     }
 }

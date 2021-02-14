@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RubricaServiceImpl implements RubricaService {
 
-    
     @Autowired
-     ContattoRepository contattoRepository;
+    ContattoRepository contattoRepository;
     //inizializziamo un contatore a 0 e ci creiamo un ArrayList
-    int cont = 0;
     List<Contatto> rubricaService = new ArrayList<>();
 
     //Nel metodo svuotaRubrica trmite ".clear" andiamo ad eliminare tutti i
@@ -24,7 +22,7 @@ public class RubricaServiceImpl implements RubricaService {
     public void svuotaRubrica() {
         contattoRepository.deleteAllInBatch();
     }
-   
+
     //Nel metodo inserisciContatto andiamo a settare il valore Id incrementandolo
     //ed utilizziamo ".add" per aggiungere il contatto nell' ArrayList
     @Override
@@ -41,8 +39,7 @@ public class RubricaServiceImpl implements RubricaService {
     //cancelliamo tutti i contatti che hanno lo stesso id del contatto trasmesso
     //da client.
     @Override
-    public List<Contatto> cancellaContatto(Contatto contatto) {
-        this.rubricaService.removeIf(rs -> rs.getId() == contatto.getId());
-        return this.rubricaService;
+    public void cancellaContatto(Contatto contatto) {
+        contattoRepository.delete(contatto);
     }
 }

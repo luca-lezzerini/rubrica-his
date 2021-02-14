@@ -8,5 +8,5 @@ public interface RubricaService {
     void svuotaRubrica();
     void inserisciContatto(Contatto contatto);
     List<Contatto> recuperaContatti();
-    List<Contatto> cancellaContatto(Contatto contatto);
+    void cancellaContatto(Contatto contatto);
 }
