@@ -34,7 +34,6 @@ export class AppComponent {
   /* In questo metodo vediamo come far partire la richiesta,riga 43-48 */
   confermaAggiunta() {
     if (this.contatto.nome != "" && this.contatto.cognome != "" && this.contatto.telefono != "") {
-
       this.emptyNome = false;
       this.emptyCognome = false;
       this.emptyTelefono = false;
@@ -83,7 +82,6 @@ export class AppComponent {
       this.emptyNome = false;
       this.emptyCognome = false;
     }
-
   }
 
   annullaAggiunta() {
@@ -100,21 +98,17 @@ export class AppComponent {
     let oss: Observable<ResRubricaDto>
     oss = this.http.get<ResRubricaDto>("http://localhost:8080/recuperatuttiicontatti")
     oss.subscribe(risp => {
-      this.rubricaVisualizzata = risp.rubrica
-
+      this.rubricaVisualizzata = risp.rubrica;
+      if (this.rubricaVisualizzata.length == 0) {
+        this.clientNotFound = true;
+      } else {
+        this.clientNotFound = false;
+      }
+      for (let i = 0; i < this.rubricaVisualizzata.length; i++) {
+        this.pulsanteCanc[i] = false;
+      }
     })
-
-    if (this.rubricaVisualizzata.length == 0) {
-      this.clientNotFound = true;
-    } else {
-      this.clientNotFound = false;
-    }
-
-    for (let i = 0; i < this.rubricaVisualizzata.length; i++) {
-      this.pulsanteCanc[i] = false;
-    }
   }
-
 
   confermaCancellaContatto(i: number) {
     this.stato = "VIS";
@@ -139,7 +133,7 @@ export class AppComponent {
   }
 
   svuotaRubrica() {
-    this.stato="START";
+    this.stato = "START";
     let oss: Observable<ResRubricaDto>
     oss = this.http.post<ResRubricaDto>("http://localhost:8080/svuotarubrica", this.rubricaVisualizzata)
     oss.subscribe(risp => this.rubricaVisualizzata = risp.rubrica)

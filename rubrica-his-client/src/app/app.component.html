@@ -45,10 +45,8 @@
             <td>{{contatto.cognome}}</td>
             <td>{{contatto.telefono}}</td>
             <td>
-                <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false"
-                    [disabled]="cancDisabled">X</button>
-                <button (click)="confermaCancellaContatto(i)"
-                    *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Conferma</button>
+                <button (click)="cancellaContatto(i)" *ngIf="stato!='CANC' || pulsanteCanc[i]==false" [disabled]="cancDisabled">X</button>
+                <button (click)="confermaCancellaContatto(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Conferma</button>
                 <button (click)="annullaCancella(i)" *ngIf="stato=='CANC' && pulsanteCanc[i]==true">Annulla</button>
             </td>
         </tr>
