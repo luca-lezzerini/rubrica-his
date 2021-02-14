@@ -20,7 +20,8 @@ public class RubricaController {
     @RequestMapping("/svuotarubrica")
     @ResponseBody
     public ResRubricaDto svuotaRubrica() {
-        return new ResRubricaDto(rubricaService.svuotaRubrica());
+        rubricaService.svuotaRubrica();
+        return new ResRubricaDto();
     }
 
     @RequestMapping("/inseriscicontatto")
